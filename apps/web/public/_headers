@@ -1,8 +1,4 @@
 /*
-  Cache + hardening headers for the static assets.
-  Workers Static Assets applies this file automatically.
-*/
-/*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY

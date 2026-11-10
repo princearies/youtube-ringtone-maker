@@ -165,13 +165,17 @@ if (step === 'prepare') {
   const outputPath = argument
   const flowSource = process.argv[4]
 
-  await send('Emulation.setDeviceMetricsOverride', {
-    width: 390,
-    height: 844,
-    deviceScaleFactor: 3,
-    mobile: true,
-  })
-  await send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 })
+  // NO_EMULATION=1 trusts an already phone-sized browser window, which keeps the
+  // layout viewport and the captured viewport in sync on real remote sites.
+  if (process.env.NO_EMULATION !== '1') {
+    await send('Emulation.setDeviceMetricsOverride', {
+      width: 390,
+      height: 844,
+      deviceScaleFactor: 3,
+      mobile: true,
+    })
+    await send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 })
+  }
   await send('Page.navigate', { url: APP_URL })
   await sleep(2200)
 

@@ -242,7 +242,9 @@ export default function App() {
 
           {source && (
             <div className="mt-4 grid gap-4 sm:mt-5 sm:gap-5 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
-              <div className="space-y-4 sm:space-y-5">
+              {/* min-w-0: grid items default to min-width:auto, which lets a long
+                  filename/title widen the whole column past the viewport. */}
+              <div className="min-w-0 space-y-4 sm:space-y-5">
                 <TrackCard source={source} onChangeLink={reset} />
                 <TrimEditor
                   source={source}

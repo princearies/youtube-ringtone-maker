@@ -15,6 +15,22 @@ Paste a YouTube link, drag out the exact seconds you want, download an **MP3** f
 
 ---
 
+## Live
+
+| Deployment | URL | What it is |
+| --- | --- | --- |
+| **Worker** (app + API) | <https://ringcut.mykira.workers.dev> | Hono API **and** the SPA from one origin |
+| **Pages** (frontend mirror) | <https://ringcut-web.pages.dev> | Same SPA on Pages, calling the Worker API cross-origin (CORS allowlisted) |
+
+![Live on a phone](docs/screenshots/mobile-live.png)
+
+> ⚠️ The audio engine is **not** on Cloudflare — Workers cannot run `ffmpeg`/`yt-dlp`. The live demo
+> reaches an engine running on a laptop through a Cloudflare Tunnel (`cloudflared`). While that tunnel or
+> the laptop is down, the UI still loads and reports **Engine offline** (`ENGINE_UNAVAILABLE`). To make it
+> permanent, host `services/engine` on any small box — see [docs/DEPLOY.md](docs/DEPLOY.md).
+
+---
+
 ## Why there is a separate engine
 
 Cloudflare Workers cannot spawn processes, so `yt-dlp` + `ffmpeg` cannot run there. Ringcut splits the

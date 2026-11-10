@@ -45,7 +45,7 @@ export default function ExportPanel({
   }, [clip])
 
   return (
-    <section className="card p-4 sm:p-5" aria-label="Export">
+    <section className="card min-w-0 p-4 sm:p-5" aria-label="Export">
       <h2 className="font-display text-sm font-semibold tracking-wide text-zinc-200">Export</h2>
       <p className="mt-0.5 text-[11px] text-zinc-500 sm:text-xs">Pick the format your phone wants.</p>
 
