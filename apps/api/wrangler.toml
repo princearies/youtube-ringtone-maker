@@ -1,0 +1,29 @@
+name = "ringcut"
+main = "src/index.js"
+compatibility_date = "2025-10-01"
+workers_dev = true
+
+# Static site (apps/web/dist) is served by this same Worker, so the browser never
+# makes a cross-origin request and there is no CORS surface to get wrong.
+[assets]
+directory = "../web/dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+run_worker_first = ["/api/*"]
+
+[vars]
+# Where the ffmpeg/yt-dlp engine lives (see docs/DEPLOY.md).
+ENGINE_URL = "https://ringcut-engine.example.com"
+# Extra origins allowed to call the API (comma separated). Empty = same origin only.
+ALLOWED_ORIGINS = ""
+
+# Optional: add a KV namespace for distributed rate limiting.
+# Without it, limits are per-isolate (still effective, just not global).
+# [[kv_namespaces]]
+# binding = "RATE"
+# id = "00000000000000000000000000000000"
+
+# Optional custom domain:
+# [[routes]]
+# pattern = "ringcut.example.com"
+# custom_domain = true

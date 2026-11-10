@@ -1,0 +1,23 @@
+{
+  "name": "youtube-ringtone-maker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Micro-SaaS: turn any YouTube link into an MP3 / M4R ringtone, trimmed to the second.",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "apps/web",
+    "apps/api"
+  ],
+  "scripts": {
+    "dev": "node --watch services/engine/server.mjs",
+    "dev:web": "npm --workspace apps/web run dev",
+    "dev:api": "npm --workspace apps/api run dev",
+    "build": "npm --workspace apps/web run build",
+    "deploy": "npm run build && npm --workspace apps/api run deploy",
+    "start": "node services/engine/server.mjs",
+    "selftest": "node scripts/selftest.mjs"
+  }
+}
